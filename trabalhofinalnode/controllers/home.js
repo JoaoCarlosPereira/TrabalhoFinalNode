@@ -2,7 +2,7 @@ module.exports = function (app) {
     var Usuario = app.models.usuario;
     var HomeController = {
         index: function (req, res) {
-            res.render('template');
+            res.render('casca');
         },
         login: function (req, res) {
             var query = { email: req.body.usuario.email };
