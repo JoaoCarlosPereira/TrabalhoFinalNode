@@ -2,7 +2,7 @@ module.exports = function (app) {
     var Usuario = app.models.usuario;
     var HomeController = {
         index: function (req, res) {
-            res.render('casca');
+            res.render('home/index');
         },
         login: function (req, res) {
             var query = { email: req.body.usuario.email };
@@ -11,14 +11,14 @@ module.exports = function (app) {
                 .exec(function (erro, usuario) {
                     if (usuario) {
                         req.session.usuario = usuario;
-                        res.redirect('/contatos');
+                        res.render('casca');
                     } else {
                         Usuario.create(req.body.usuario, function (erro, usuario) {
                             if (erro) {
                                 res.redirect('/');
                             } else {
                                 req.session.usuario = usuario;
-                                res.redirect('/contatos');
+                                res.render('casca');
                             }
                         });
                     }
