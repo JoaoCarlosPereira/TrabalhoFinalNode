@@ -10,10 +10,10 @@ var express = require('express')
 
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
-app.use(cookieParser('ntalk'));
+app.use(cookieParser('cart_lista_de_compras'));
 app.use(session({
-	secret: "abc123",
-	name: 'ntalk',
+	secret: "trabalhonode18",
+	name: 'cart_lista_de_compras',
 	resave: true,
 	saveUninitialized: true
 }));
@@ -23,7 +23,7 @@ app.use(methodOverride('_method'));
 app.use(express.static(__dirname + '/public'));
 app.use(express.static(__dirname + '/views'));
 
-mongoose.connect('mongodb://localhost/ntalk');
+mongoose.connect('mongodb://trabalhonode:trabalhonode18@ds227821.mlab.com:27821/cart_lista_de_compras');
 global.db = mongoose.connection;
 
 load().include('models')
@@ -39,5 +39,5 @@ app.use(error.serverError);
 
 
 app.listen(3000, function () {
-	console.log("Ntalk no ar.");
+	console.log("Lista de compras no ar.");
 });
