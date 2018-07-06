@@ -23,9 +23,8 @@ module.exports = function (app) {
         show: function (req, res) {
             var _id = req.session.usuario._id;
             Usuario.findById(_id, function (erro, usuario) {
-                var produtoID = req.params.id;
-                var produto = usuario.produtos.id(produtoID);
-                var resultado = {produto: produto};
+                var produtos = usuario.produtos;
+                var resultado = {produtos: produtos};
                 res.render('produtos/show', resultado);
             });
         },
@@ -43,8 +42,8 @@ module.exports = function (app) {
             Usuario.findById(_id, function (erro, usuario) {
                 var produtoID = req.params.id;
                 var produto = usuario.produtos.id(produtoID);
-                produto.nome = req.body.produto.nome;
-                produto.email = req.body.produto.email;
+                produto.descricao = req.body.produto.descricao;
+                produto.quantidade = req.body.produto.quantidade;
                 usuario.save(function () {
                     res.redirect('/produtos');
                 });
@@ -56,7 +55,7 @@ module.exports = function (app) {
                 var produtoID = req.params.id;
                 usuario.produtos.id(produtoID).remove();
                 usuario.save(function () {
-                    res.redirect('/produtos');
+                    res.redirect('lista');
                 });
             });
         }
