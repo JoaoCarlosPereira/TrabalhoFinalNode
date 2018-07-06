@@ -18,12 +18,12 @@
         <div class="container-fluid">
             <section>
                 <div class="formulario">  
-                    <form action="" method="post" id="validate">                  
+                    <form action="/produto" method="post" id="validate">                  
                         <label>Produto:</label>
-                        <input name="produto" type="text" class="g">
+                        <input name="produto[descricao]" type="text" class="g">
 
                         <label>Quantidade</label>
-                        <input name="quantidade" type="number" class="g">
+                        <input name="produto[quantidade]" type="number" class="g">
 
                         <center><input type="submit" value="Cadastrar"></center>
                     </form>

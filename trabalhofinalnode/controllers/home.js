@@ -5,26 +5,25 @@ module.exports = function (app) {
             res.render('home/index');
         },
         login: function (req, res) {
-            var query = { email: req.body.usuario.email };
+            var query = {email: req.body.usuario.email};
             Usuario.findOne(query)
-                .select('nome email')
-                .exec(function (erro, usuario) {
-                    if (usuario) {
-                        req.session.usuario = usuario;
-                        res.render('casca');
-                    } else {
-                        Usuario.create(req.body.usuario, function (erro, usuario) {
-                            if (erro) {
-                                res.redirect('/');
-                            } else {
-                                req.session.usuario = usuario;
-                                res.render('casca');
-                            }
-                        });
-                    }
-                });
+                    .select('nome email')
+                    .exec(function (erro, usuario) {
+                        if (usuario) {
+                            req.session.usuario = usuario;
+                            res.redirect('/produtos');
+                        } else {
+                            Usuario.create(req.body.usuario, function (erro, usuario) {
+                                if (erro) {
+                                    res.redirect('/');
+                                } else {
+                                    req.session.usuario = usuario;
+                                    res.redirect('/produtos');
+                                }
+                            });
+                        }
+                    });
         },
-
         logout: function (req, res) {
             req.session.destroy();
             res.redirect('/');
