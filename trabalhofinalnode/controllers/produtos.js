@@ -1,65 +1,65 @@
 module.exports = function (app) {
-	var ContatoController = {
+	var ProdutoController = {
 		index: function (req, res) {
 			var _id = req.session.usuario._id;
 			Usuario.findById(_id, function (erro, usuario) {
-				var contatos = usuario.contatos;
-				var resultado = { contatos: contatos };
-				res.render('contatos/index', resultado);
+				var produtos = usuario.produtos;
+				var resultado = { produtos: produtos };
+				res.render('produtos/index', resultado);
 			});
 		},
 		create: function (req, res) {
 			var _id = req.session.usuario._id;
 			Usuario.findById(_id, function (erro, usuario) {
-				var contato = req.body.contato;
-				var contatos = usuario.contatos;
-				contatos.push(contato);
+				var produto = req.body.produto;
+				var produtos = usuario.produtos;
+				produtos.push(produto);
 				usuario.save(function () {
-					res.redirect('/contatos');
+					res.redirect('/produtos');
 				});
 			});
 		},
 		show: function (req, res) {
 			var _id = req.session.usuario._id;
 			Usuario.findById(_id, function (erro, usuario) {
-				var contatoID = req.params.id;
-				var contato = usuario.contatos.id(contatoID);
-				var resultado = { contato: contato };
-				res.render('contatos/show', resultado);
+				var produtoID = req.params.id;
+				var produto = usuario.produtos.id(produtoID);
+				var resultado = { produto: produto };
+				res.render('produtos/show', resultado);
 			});
 		},
 		edit: function (req, res) {
 			var _id = req.session.usuario._id;
 			Usuario.findById(_id, function (erro, usuario) {
-				var contatoID = req.params.id;
-				var contato = usuario.contatos.id(contatoID);
-				var resultado = { contato: contato };
-				res.render('contatos/edit', resultado);
+				var produtoID = req.params.id;
+				var produto = usuario.produtos.id(produtoID);
+				var resultado = { produto: produto };
+				res.render('produtos/edit', resultado);
 			});
 		},
 		update: function (req, res) {
 			var _id = req.session.usuario._id;
 			Usuario.findById(_id, function (erro, usuario) {
-				var contatoID = req.params.id;
-				var contato = usuario.contatos.id(contatoID);
-				contato.nome = req.body.contato.nome;
-				contato.email = req.body.contato.email;
+				var produtoID = req.params.id;
+				var produto = usuario.produtos.id(produtoID);
+				produto.nome = req.body.produto.nome;
+				produto.email = req.body.produto.email;
 				usuario.save(function () {
-					res.redirect('/contatos');
+					res.redirect('/produtos');
 				});
 			});
 		},
 		destroy: function (req, res) {
 			var _id = req.session.usuario._id;
 			Usuario.findById(_id, function (erro, usuario) {
-				var contatoID = req.params.id;
-				usuario.contatos.id(contatoID).remove();
+				var produtoID = req.params.id;
+				usuario.produtos.id(produtoID).remove();
 				usuario.save(function () {
-					res.redirect('/contatos');
+					res.redirect('/produtos');
 				});
 			});
 		}
 		// fim do controller...
 	}
-	return ContatoController;
+	return ProdutoController;
 };
